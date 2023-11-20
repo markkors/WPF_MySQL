@@ -25,6 +25,14 @@ namespace WPF_MySQL.Controllers
 
         }
         
+        // generic function to execute a query and return a reader
+        public MySqlDataReader executeQuery(string query)
+        {
+            MySqlCommand command = new MySqlCommand(query, connection);
+            MySqlDataReader reader = command.ExecuteReader();
+            return reader;
+        }
+        
 
         
 

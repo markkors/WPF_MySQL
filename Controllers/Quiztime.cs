@@ -10,6 +10,7 @@ namespace WPF_MySQL.Controllers
     public class Quiztime
     {
         public static Controllers.SQL mySqlObject = new Controllers.SQL();
+        private Models.Quiz _activeQuiz;
 
         // create constructor
         public Quiztime()
@@ -20,11 +21,7 @@ namespace WPF_MySQL.Controllers
         private List<Models.Quiz> getQuizzes()
         {
             List<Models.Quiz> quizzes = new List<Models.Quiz>();
-
-            string query = "SELECT * FROM quiz";
-
-            MySqlCommand command = new MySqlCommand(query, mySqlObject.connection);
-            MySqlDataReader reader = command.ExecuteReader();
+            MySqlDataReader reader = mySqlObject.executeQuery("SELECT * FROM quiz");
 
             while (reader.Read())
             {
@@ -46,6 +43,10 @@ namespace WPF_MySQL.Controllers
             } 
         }
 
+        public Models.Quiz activeQuiz { 
+            get { return _activeQuiz; } 
+            set { _activeQuiz = value; } 
+        }
 
     }
 }
