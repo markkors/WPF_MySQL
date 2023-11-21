@@ -25,10 +25,15 @@ namespace WPF_MySQL
         public MainWindow()
         {
             InitializeComponent();
-            Debug.WriteLine(quiztimeObject.Quizzes.Count());
+            this.DataContext = quiztimeObject;
+            //Debug.WriteLine(quiztimeObject.Quizzes.Count());
+            //quiztimeObject.Quizzes.ForEach(quiz => Debug.WriteLine(quiz.Name));
+            btnTest.Click += BtnTest_Click;
+        }
 
-            quiztimeObject.Quizzes.ForEach(quiz => Debug.WriteLine(quiz.Name));
-            
+        private void BtnTest_Click(object sender, RoutedEventArgs e)
+        {
+            // nog ff niks
         }
     }
 }

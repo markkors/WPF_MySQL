@@ -47,7 +47,7 @@ namespace WPF_MySQL.Controllers
             } 
         }
 
-        public Models.Quiz activeQuiz { 
+        public Models.Quiz ActiveQuiz { 
             get { return _activeQuiz; } 
             set { _activeQuiz = value; } 
         }
