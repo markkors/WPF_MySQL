@@ -21,10 +21,13 @@ namespace WPF_MySQL
     /// </summary>
     public partial class MainWindow : Window
     {
+        Controllers.Quiztime quiztimeObject = new Controllers.Quiztime();
         public MainWindow()
         {
             InitializeComponent();
-            App.quiztimeObject.Quizzes.ForEach(quiz => Debug.WriteLine(quiz.Name));
+            Debug.WriteLine(quiztimeObject.Quizzes.Count());
+
+            quiztimeObject.Quizzes.ForEach(quiz => Debug.WriteLine(quiz.Name));
             
         }
     }

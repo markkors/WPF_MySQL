@@ -18,7 +18,7 @@ namespace WPF_MySQL
 
         
         // create instance of quiztime
-        public static Controllers.Quiztime quiztimeObject = new Controllers.Quiztime();
+        //public static Controllers.Quiztime quiztimeObject = new Controllers.Quiztime();
 
 
         // create constructor

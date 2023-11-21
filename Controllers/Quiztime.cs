@@ -7,21 +7,25 @@ using System.Threading.Tasks;
 
 namespace WPF_MySQL.Controllers
 {
-    public class Quiztime
+    public class Quiztime : SQL
     {
-        public static Controllers.SQL mySqlObject = new Controllers.SQL();
         private Models.Quiz _activeQuiz;
+        private List<Models.Quiz> _quizzes = new List<Models.Quiz>();
 
         // create constructor
         public Quiztime()
         {
-            
+            _quizzes = getQuizzes();
         }
 
         private List<Models.Quiz> getQuizzes()
         {
             List<Models.Quiz> quizzes = new List<Models.Quiz>();
-            MySqlDataReader reader = mySqlObject.executeQuery("SELECT * FROM quiz");
+            string query = "SELECT * FROM quiz";
+            MySqlCommand cmd = new MySqlCommand(query, connection);
+
+            MySqlDataReader reader = cmd.ExecuteReader();
+          
 
             while (reader.Read())
             {
@@ -39,7 +43,7 @@ namespace WPF_MySQL.Controllers
         // getter for the quizzes
         public List<Models.Quiz> Quizzes { 
             get {
-                return getQuizzes();
+                return _quizzes;
             } 
         }
 
