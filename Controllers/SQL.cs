@@ -13,17 +13,32 @@ namespace WPF_MySQL.Controllers
     public class SQL
     {
 
-       // save the connection object as public
-       public MySqlConnection connection;
+        // save the connection object as public
+        private MySqlConnection _connection;
 
-       // create constructor 
-       public SQL()
+        public void closeConnection()
         {
-            connection = new MySqlConnection();
-            connection.ConnectionString = "Server=localhost;User ID=quiz_user;Password=123456789;Database=questions";
-            connection.Open();
+            _connection.Close();
+        }
+
+        private void openConnection()
+        {
+            if (_connection == null)
+            {
+                _connection = new MySqlConnection();
+                _connection.ConnectionString = "Server=localhost;User ID=quiz_user;Password=123456789;Database=questions";
+                _connection.Open();
+            }
 
         }
-        
+
+        public MySqlConnection Connection
+        {
+            get
+            {
+                openConnection();
+                return _connection;
+            }
+        }
     }
 }

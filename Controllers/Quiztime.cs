@@ -5,6 +5,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls.Primitives;
+using WPF_MySQL.Models;
 
 namespace WPF_MySQL.Controllers
 {
@@ -13,7 +15,6 @@ namespace WPF_MySQL.Controllers
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-
         private Models.Quiz _activeQuiz;
         private List<Models.Quiz> _quizzes = new List<Models.Quiz>();
 
@@ -21,26 +22,54 @@ namespace WPF_MySQL.Controllers
         public Quiztime()
         {
             _quizzes = getQuizzes();
+            NotifyPropertyChanged("Quizzes");
+        }
+
+
+        private List<Models.Question> Questions(int idQuiz)
+        {
+            List<Models.Question> questions = new List<Models.Question>();
+            string query = "SELECT question.* FROM quiz " +
+                "INNER JOIN quizquestion ON quiz.idQuiz = quizquestion.QuizID " +
+                "INNER JOIN question ON quizquestion.QuestionID = question.idQuestion WHERE quiz.idQuiz = @idQuiz;";
+            using (MySqlCommand cmd = new MySqlCommand(query, Connection))
+            {
+                cmd.Parameters.AddWithValue("@idQuiz", idQuiz);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Models.Question question = new Models.Question();
+                    question.idQuestion = reader.GetInt32(0);
+                    question.Type = reader.GetInt32(1);
+                    question.Desc = reader.GetString(2);
+                    questions.Add(question);
+                }
+                reader.Close();
+                reader.Dispose();
+
+            }
+            return questions;
         }
 
         private List<Models.Quiz> getQuizzes()
         {
             List<Models.Quiz> quizzes = new List<Models.Quiz>();
             string query = "SELECT * FROM quiz";
-            MySqlCommand cmd = new MySqlCommand(query, connection);
-
-            MySqlDataReader reader = cmd.ExecuteReader();
-          
-
-            while (reader.Read())
+         
+            using (MySqlCommand cmd = new MySqlCommand(query, Connection))
             {
-              Models.Quiz quiz = new Models.Quiz();
-              quiz.idQuiz = reader.GetInt32(0);
-              quiz.Date = reader.GetDateTime(1);
-              quiz.Name = reader.GetString(2);
-              quizzes.Add(quiz);
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    Models.Quiz quiz = new Models.Quiz();
+                    quiz.idQuiz = reader.GetInt32(0);
+                    quiz.Date = reader.GetDateTime(1);
+                    quiz.Name = reader.GetString(2);
+                    quizzes.Add(quiz);
+                }
+                reader.Close();
+                reader.Dispose();
             }
-
             return quizzes;
         }
 
@@ -55,12 +84,14 @@ namespace WPF_MySQL.Controllers
         public Models.Quiz ActiveQuiz { 
             get { return _activeQuiz; } 
             set {
+                // active quiz updated
                 _activeQuiz = value;
+                _activeQuiz.Questions = Questions(_activeQuiz.idQuiz);
                 NotifyPropertyChanged("ActiveQuiz");
             } 
         }
 
-        private void NotifyPropertyChanged(string propertyName)
+        public void NotifyPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }

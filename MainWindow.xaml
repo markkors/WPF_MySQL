@@ -14,18 +14,23 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
         <ComboBox Grid.Row="0"
                   ItemsSource="{Binding Path=Quizzes}"
+                  SelectedItem="{Binding Path=ActiveQuiz,UpdateSourceTrigger=PropertyChanged}"
                   DisplayMemberPath="Name"
                   Name="cmbCombo"
                   />
         <Button Grid.Row="1" Content="Button" Name="btnTest"/>
+        
         <Label Grid.Row="2"
                Content="{Binding Path=ActiveQuiz.Name}"
                Name="lblTest" />
+        
+        <ListBox Grid.Row="3" ItemsSource="{Binding Path=ActiveQuiz.Questions}" DisplayMemberPath="Desc" />
+
 
     </Grid>
 </Window>

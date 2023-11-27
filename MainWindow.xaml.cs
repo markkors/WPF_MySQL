@@ -14,6 +14,9 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using WPF_MySQL.Models;
+using WPF_MySQL.Controllers;
+using System.ComponentModel;
+using System.Windows.Media.Animation;
 
 namespace WPF_MySQL
 {
@@ -25,13 +28,13 @@ namespace WPF_MySQL
         Controllers.Quiztime quiztimeObject = new Controllers.Quiztime();
         public MainWindow()
         {
+      
+
             InitializeComponent();
             this.DataContext = quiztimeObject;
-            //Debug.WriteLine(quiztimeObject.Quizzes.Count());
-            //quiztimeObject.Quizzes.ForEach(quiz => Debug.WriteLine(quiz.Name));
             btnTest.Click += BtnTest_Click;
             cmbCombo.SelectionChanged += CmbCombo_SelectionChanged;
-           
+          
 
 
         }
@@ -39,17 +42,19 @@ namespace WPF_MySQL
         private void CmbCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             
-            Quiz _selectedQuiz = (Quiz)cmbCombo.SelectedItem;
-            quiztimeObject.ActiveQuiz = _selectedQuiz;
-                    
-
+            
+            //Quiz _selectedQuiz = (Quiz)cmbCombo.SelectedItem;
+            //quiztimeObject.ActiveQuiz = _selectedQuiz;
+            
 
 
         }
 
         private void BtnTest_Click(object sender, RoutedEventArgs e)
         {
-            // nog ff niks
+            Debug.WriteLine(quiztimeObject.ActiveQuiz.Name);
+            Debug.WriteLine(quiztimeObject.ActiveQuiz.Questions.Count.ToString());
+            
         }
     }
 }

@@ -11,6 +11,8 @@ namespace WPF_MySQL.Models
         public int idQuiz { get; set; }
         public DateTime Date { get; set; }
         public string Name { get; set; }
-        
+       
+        public List<Question> Questions { get; set; }
+
     }
 }
