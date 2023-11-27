@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WPF_MySQL.Models;
 
 namespace WPF_MySQL
 {
@@ -29,6 +30,21 @@ namespace WPF_MySQL
             //Debug.WriteLine(quiztimeObject.Quizzes.Count());
             //quiztimeObject.Quizzes.ForEach(quiz => Debug.WriteLine(quiz.Name));
             btnTest.Click += BtnTest_Click;
+            cmbCombo.SelectionChanged += CmbCombo_SelectionChanged;
+           
+
+
+        }
+
+        private void CmbCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            
+            Quiz _selectedQuiz = (Quiz)cmbCombo.SelectedItem;
+            quiztimeObject.ActiveQuiz = _selectedQuiz;
+                    
+
+
+
         }
 
         private void BtnTest_Click(object sender, RoutedEventArgs e)

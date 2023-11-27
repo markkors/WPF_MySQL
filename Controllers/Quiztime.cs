@@ -1,14 +1,19 @@
 ﻿using MySqlConnector;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace WPF_MySQL.Controllers
 {
-    public class Quiztime : SQL
+    public class Quiztime : SQL, INotifyPropertyChanged
     {
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+
         private Models.Quiz _activeQuiz;
         private List<Models.Quiz> _quizzes = new List<Models.Quiz>();
 
@@ -49,7 +54,15 @@ namespace WPF_MySQL.Controllers
 
         public Models.Quiz ActiveQuiz { 
             get { return _activeQuiz; } 
-            set { _activeQuiz = value; } 
+            set {
+                _activeQuiz = value;
+                NotifyPropertyChanged("ActiveQuiz");
+            } 
+        }
+
+        private void NotifyPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
 
     }
