@@ -17,6 +17,7 @@ using WPF_MySQL.Models;
 using WPF_MySQL.Controllers;
 using System.ComponentModel;
 using System.Windows.Media.Animation;
+using WPF_MySQL.Views;
 
 namespace WPF_MySQL
 {
@@ -25,18 +26,27 @@ namespace WPF_MySQL
     /// </summary>
     public partial class MainWindow : Window
     {
-        Controllers.Quiztime quiztimeObject = new Controllers.Quiztime();
+        Controllers.Quiztime quiztimeObject = new Controllers.Quiztime(); // create instance of Quiztime class
         public MainWindow()
         {
       
 
             InitializeComponent();
             this.DataContext = quiztimeObject;
+            
+            // event handlers
             btnTest.Click += BtnTest_Click;
+            btnOpenWindow.Click += BtnOpenWindow_Click;
             cmbCombo.SelectionChanged += CmbCombo_SelectionChanged;
-          
+            
 
 
+        }
+
+        private void BtnOpenWindow_Click(object sender, RoutedEventArgs e)
+        {
+            TestWindow tw = new TestWindow();
+            tw.ShowDialog();
         }
 
         private void CmbCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -55,6 +65,14 @@ namespace WPF_MySQL
             Debug.WriteLine(quiztimeObject.ActiveQuiz.Name);
             Debug.WriteLine(quiztimeObject.ActiveQuiz.Questions.Count.ToString());
             
+        }
+
+        private void btnQuestionClick(object sender, RoutedEventArgs e)
+        {
+             Button b = (Button)sender;
+             Question Selected_Question = (Question)b.DataContext;
+
+           
         }
     }
 }

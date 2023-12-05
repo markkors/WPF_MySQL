@@ -11,6 +11,7 @@ namespace WPF_MySQL.Models
         public int idQuestion { get; set; }
         public int Type { get; set; }
         public string Desc { get; set; }
+        public string imagepath { get; set; }
 
     }
 }

@@ -42,6 +42,7 @@ namespace WPF_MySQL.Controllers
                     question.idQuestion = reader.GetInt32(0);
                     question.Type = reader.GetInt32(1);
                     question.Desc = reader.GetString(2);
+                    question.imagepath = reader.GetString(3);
                     questions.Add(question);
                 }
                 reader.Close();
@@ -90,6 +91,8 @@ namespace WPF_MySQL.Controllers
                 NotifyPropertyChanged("ActiveQuiz");
             } 
         }
+
+        public int MyProperty { get; set; }
 
         public void NotifyPropertyChanged(string propertyName)
         {
