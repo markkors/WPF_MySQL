@@ -26,12 +26,13 @@ namespace WPF_MySQL
     /// </summary>
     public partial class MainWindow : Window
     {
-        Controllers.Quiztime quiztimeObject = new Controllers.Quiztime(); // create instance of Quiztime class
+        Controllers.Quiztime quiztimeObject; 
         public MainWindow()
         {
       
 
             InitializeComponent();
+            quiztimeObject = new Controllers.Quiztime(); // create instance of Quiztime class
             this.DataContext = quiztimeObject;
             
             // event handlers
@@ -71,8 +72,14 @@ namespace WPF_MySQL
         {
              Button b = (Button)sender;
              Question Selected_Question = (Question)b.DataContext;
+             quiztimeObject.ActiveQuestion = Selected_Question;
+             
+            
+            QuestionWindow questionWindow = new QuestionWindow(quiztimeObject); 
+            questionWindow.Show();
+            
+            
 
-           
         }
     }
 }

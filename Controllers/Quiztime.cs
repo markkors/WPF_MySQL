@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls.Primitives;
@@ -17,6 +18,7 @@ namespace WPF_MySQL.Controllers
 
         private Models.Quiz _activeQuiz;
         private List<Models.Quiz> _quizzes = new List<Models.Quiz>();
+        private Question _activeQuestion;
 
         // create constructor
         public Quiztime()
@@ -25,6 +27,14 @@ namespace WPF_MySQL.Controllers
             NotifyPropertyChanged("Quizzes");
         }
 
+        public void UpdateViewModel()
+        {
+            NotifyPropertyChanged("Quizzes");
+            NotifyPropertyChanged("ActiveQuiz");
+            NotifyPropertyChanged("ActiveQuestion");
+            NotifyPropertyChanged("MyProperty");
+           
+        }
 
         private List<Models.Question> Questions(int idQuiz)
         {
@@ -92,11 +102,27 @@ namespace WPF_MySQL.Controllers
             } 
         }
 
+        public Question ActiveQuestion { 
+            get {
+                return _activeQuestion; 
+            }
+            set {
+                _activeQuestion = value;
+                NotifyPropertyChanged();
+
+            } 
+        }
+
         public int MyProperty { get; set; }
 
-        public void NotifyPropertyChanged(string propertyName)
+        public void DoNotifyPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        protected void NotifyPropertyChanged([CallerMemberName] string name = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
 
     }
