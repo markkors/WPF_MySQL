@@ -25,6 +25,7 @@ namespace WPF_MySQL.Controllers
         {
             _quizzes = getQuizzes();
             NotifyPropertyChanged("Quizzes");
+            
         }
 
         public void UpdateViewModel()
@@ -36,6 +37,12 @@ namespace WPF_MySQL.Controllers
            
         }
 
+
+/// <summary>
+/// Get questions for a quiz
+/// </summary>
+/// <param name="idQuiz">The quiz parameter</param>
+/// <returns>Questions</returns>
         private List<Models.Question> Questions(int idQuiz)
         {
             List<Models.Question> questions = new List<Models.Question>();
@@ -84,6 +91,8 @@ namespace WPF_MySQL.Controllers
             return quizzes;
         }
 
+        #region Properties
+
 
         // getter for the quizzes
         public List<Models.Quiz> Quizzes { 
@@ -115,6 +124,11 @@ namespace WPF_MySQL.Controllers
 
         public int MyProperty { get; set; }
 
+        public Boolean MyTrueFalseProperty { get; set; }
+        #endregion
+
+        #region Binding notifiers
+
         public void DoNotifyPropertyChanged(string propertyName)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
@@ -124,6 +138,8 @@ namespace WPF_MySQL.Controllers
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
+        #endregion
 
     }
 }

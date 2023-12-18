@@ -43,26 +43,34 @@
 
 
         <ListView Grid.Row="6"
-                  ItemsSource="{Binding Path=ActiveQuiz.Questions}">
+                  ItemsSource="{Binding Path=ActiveQuiz.Questions}"
+                  d:ItemsSource="{d:SampleData ItemCount=5}">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackPanel Orientation="Horizontal"
-                                VerticalAlignment="Stretch">
+                    <Grid Width="700">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
                         <Image Source="{Binding Path=imagepath}"
-                               HorizontalAlignment="Center"
+                               HorizontalAlignment="Left"
                                VerticalAlignment="Top"
                                RenderOptions.BitmapScalingMode="Fant"
                                Stretch="Fill"
                                Width="64"
-                               Height="64" />
+                               Height="64" 
+                               Grid.Column="0"/>
                         <TextBlock Text="{Binding Path=Desc}"
-                                   HorizontalAlignment="Center"
-                                   VerticalAlignment="Bottom" />
+                                   HorizontalAlignment="Left"
+                                   VerticalAlignment="Bottom" 
+                                   Grid.Column="1"/>
                         <Button Content="Button"
-                                HorizontalAlignment="Center"
+                                HorizontalAlignment="Right"
                                 VerticalAlignment="Bottom"
-                                Click="btnQuestionClick" />
-                    </StackPanel>
+                                Click="btnQuestionClick" 
+                                Grid.Column="2"/>
+                    </Grid>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
