@@ -26,7 +26,10 @@ namespace WPF_MySQL
     /// </summary>
     public partial class MainWindow : Window
     {
-        Controllers.Quiztime quiztimeObject; 
+        Controllers.Quiztime quiztimeObject;
+
+        TestWindow AudienceScreen;
+
         public MainWindow()
         {
       
@@ -46,8 +49,10 @@ namespace WPF_MySQL
 
         private void BtnOpenWindow_Click(object sender, RoutedEventArgs e)
         {
-            TestWindow tw = new TestWindow();
-            tw.ShowDialog();
+           AudienceScreen = new TestWindow();
+            // modal open window
+            // tw.ShowDialog();
+           AudienceScreen.Show();
         }
 
         private void CmbCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,11 +78,13 @@ namespace WPF_MySQL
              Button b = (Button)sender;
              Question Selected_Question = (Question)b.DataContext;
              quiztimeObject.ActiveQuestion = Selected_Question;
-             
-            
-            QuestionWindow questionWindow = new QuestionWindow(quiztimeObject); 
-            questionWindow.Show();
-            
+
+
+            //QuestionWindow questionWindow = new QuestionWindow(quiztimeObject); 
+            //questionWindow.Show();
+
+            AudienceScreen.setQuestion = Selected_Question;
+
             
 
         }

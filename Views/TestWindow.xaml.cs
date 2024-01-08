@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WPF_MySQL.Controllers;
+using WPF_MySQL.Models;
 
 namespace WPF_MySQL.Views
 {
@@ -22,7 +23,7 @@ namespace WPF_MySQL.Views
     {
 
         TestController tc = new TestController();
-        
+        Question _activeQuestion; // private field
         public TestWindow()
         {
             InitializeComponent();
@@ -36,5 +37,22 @@ namespace WPF_MySQL.Views
            
 
         }
+
+        private void ShowActiveQuestion(Question Q)
+        {
+            lblActiveQuestion.Content = Q.Desc;
+
+        }
+
+        public Question setQuestion  { 
+            get { return _activeQuestion; } 
+            set { 
+                _activeQuestion = value;
+                ShowActiveQuestion(_activeQuestion);
+            } 
+        }
+
+
+        public int MyProperty { get; set; }
     }
 }

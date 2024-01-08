@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_MySQL.Views"
         mc:Ignorable="d"
-        Title="TestWindow" Height="450" Width="800"
+        Title="AudienceScreen" Height="450" Width="800"
         DataContext="{StaticResource TestController }">
     <Grid>
         <Label Content="{Binding Path=MyTestProperty}"></Label>
         <Button Content="Button Test" x:Name="btnTestMe"
                 Margin="333,193,365,174"></Button>
+        <Label Content="Label" Name="lblActiveQuestion"
+               VerticalAlignment="Bottom" />
     </Grid>
 </Window>
