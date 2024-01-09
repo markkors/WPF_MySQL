@@ -91,6 +91,24 @@ namespace WPF_MySQL.Controllers
             return quizzes;
         }
 
+        public void UpdateQuiz()
+        {
+            string query = "UPDATE quiz SET Name = @Name WHERE idQuiz = @idQuiz";
+            //Quiz current_active = ActiveQuiz;
+
+            using (MySqlCommand cmd = new MySqlCommand(query, Connection))
+            {
+                cmd.Parameters.AddWithValue("@Name", ActiveQuiz.Name);
+                cmd.Parameters.AddWithValue("@idQuiz", ActiveQuiz.idQuiz);
+                cmd.ExecuteNonQuery();
+                // notify the views
+                _quizzes = getQuizzes();
+                //ActiveQuiz = current_active;
+                ActiveQuiz = _quizzes.FirstOrDefault(q => q.idQuiz == ActiveQuiz.idQuiz);
+                NotifyPropertyChanged("Quizzes");
+            }
+        }
+
         #region Properties
 
 

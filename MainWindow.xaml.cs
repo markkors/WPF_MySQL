@@ -49,7 +49,7 @@ namespace WPF_MySQL
 
         private void BtnOpenWindow_Click(object sender, RoutedEventArgs e)
         {
-           AudienceScreen = new TestWindow();
+           AudienceScreen = new TestWindow(quiztimeObject);
             // modal open window
             // tw.ShowDialog();
            AudienceScreen.Show();
@@ -61,16 +61,22 @@ namespace WPF_MySQL
             
             //Quiz _selectedQuiz = (Quiz)cmbCombo.SelectedItem;
             //quiztimeObject.ActiveQuiz = _selectedQuiz;
-            
+           
 
 
         }
 
         private void BtnTest_Click(object sender, RoutedEventArgs e)
         {
-            Debug.WriteLine(quiztimeObject.ActiveQuiz.Name);
-            Debug.WriteLine(quiztimeObject.ActiveQuiz.Questions.Count.ToString());
+           // Debug.WriteLine(quiztimeObject.ActiveQuiz.Name);
+           // Debug.WriteLine(quiztimeObject.ActiveQuiz.Questions.Count.ToString());
+           // create new datetime string
+          
+
+           quiztimeObject.ActiveQuiz.Name = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+           quiztimeObject.UpdateQuiz();
             
+
         }
 
         private void btnQuestionClick(object sender, RoutedEventArgs e)

@@ -22,21 +22,15 @@ namespace WPF_MySQL.Views
     public partial class TestWindow : Window
     {
 
-        TestController tc = new TestController();
+        //TestController tc = new TestController();
         Question _activeQuestion; // private field
-        public TestWindow()
+        public TestWindow(Quiztime QuizTimeController)
         {
             InitializeComponent();
-            btnTestMe.Click += BtnTestMe_Click;
-            this.DataContext = tc;
+            this.DataContext = QuizTimeController;
         }
 
-        private void BtnTestMe_Click(object sender, RoutedEventArgs e)
-        {
-            tc.MyTestProperty += 10;
-           
-
-        }
+      
 
         private void ShowActiveQuestion(Question Q)
         {
@@ -49,6 +43,7 @@ namespace WPF_MySQL.Views
             set { 
                 _activeQuestion = value;
                 ShowActiveQuestion(_activeQuestion);
+                
             } 
         }
 

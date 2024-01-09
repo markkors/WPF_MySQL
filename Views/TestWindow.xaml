@@ -6,12 +6,22 @@
         xmlns:local="clr-namespace:WPF_MySQL.Views"
         mc:Ignorable="d"
         Title="AudienceScreen" Height="450" Width="800"
-        DataContext="{StaticResource TestController }">
+        DataContext="{StaticResource QuiztimeController }">
     <Grid>
-        <Label Content="{Binding Path=MyTestProperty}"></Label>
-        <Button Content="Button Test" x:Name="btnTestMe"
-                Margin="333,193,365,174"></Button>
-        <Label Content="Label" Name="lblActiveQuestion"
-               VerticalAlignment="Bottom" />
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <Label Grid.Row="0" Grid.Column="1" Name="lblActiveQuestion"
+               VerticalAlignment="Center"
+               Content="{Binding Path=ActiveQuestion.Desc}"/>
+        <Image Grid.Row="1" Grid.Column="1" Source="{Binding Path=ActiveQuestion.imagepath}" />
     </Grid>
 </Window>
