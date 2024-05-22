@@ -6,6 +6,20 @@
     <Application.Resources>
         <local:Quiztime x:Key="QuiztimeController" />
         <local:TestController x:Key="TestController" />
+
+        <Style x:Key="cmbBG1"
+               TargetType="ComboBox">
+            <Setter Property="Background"
+                    Value="Bisque" />
+            
+        </Style>
+
+        <Style x:Key="btnBG1"
+               TargetType="Button">
+            <Setter Property="Background"
+                    Value="Bisque" />
+        </Style>
+               
         
     </Application.Resources>
 </Application>
